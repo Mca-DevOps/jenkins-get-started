@@ -5,6 +5,8 @@ __pycache__/
 *venv/
 .env
 *.ipynb
+jenkins-volumes/jenkins-data/*
+jenkins-volumes/jenkins-docker-certs/*
 
 # Windows system files
 Thumbs.db
