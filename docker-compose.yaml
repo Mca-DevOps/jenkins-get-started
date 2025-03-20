@@ -23,3 +23,14 @@ services:
     volumes:
       - ./jenkins-volumes/jenkins-data:/var/jenkins_home
       - ./jenkins-volumes/jenkins-docker-certs:/certs/client:ro
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus-volumes/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    restart: on-failure
+    container_name: prometheus
+    networks:
+      - private-network
