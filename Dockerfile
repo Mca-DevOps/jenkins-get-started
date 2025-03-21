@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y docker-ce-cli
 
 USER jenkins
 
-RUN jenkins-plugin-cli --plugins "blueocean:1.27.17 docker-workflow:1.28 prometheus:819.v50953a_c560dd"
+RUN jenkins-plugin-cli --plugins "blueocean:1.27.17 docker-workflow:1.28 prometheus:819.v50953a_c560dd docker-plugin:1.10.0"
 
 #update all jenkins plugins
 RUN jenkins-plugin-cli --plugins $(jenkins-plugin-cli --list --updates | awk '{print $1}')
