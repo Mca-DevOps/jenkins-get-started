@@ -6,6 +6,7 @@ networks:
     name: private-network
 
 services:
+  # Jenkins container
   jenkins:
     build: .
     image: myjenkins-blueocean:v1
@@ -24,6 +25,20 @@ services:
       - ./jenkins-volumes/jenkins-data:/var/jenkins_home
       - ./jenkins-volumes/jenkins-docker-certs:/certs/client:ro
 
+  # Docker jenkins agent container
+  jenkins-docker-agent:
+    image: alpine/socat
+    container_name: jenkins-docker-agent
+    restart: always
+    networks:
+      - private-network
+    ports:
+      - "127.0.0.1:2376:2375"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: "tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock"
+
+  # Prometheus container
   prometheus:
     image: prom/prometheus:latest
     ports:
@@ -32,5 +47,17 @@ services:
       - ./prometheus-volumes/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     restart: on-failure
     container_name: prometheus
+    networks:
+      - private-network
+
+  # Grafana container
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana-volumes/grafana_data:/var/lib/grafana
+    restart: on-failure
+    container_name: grafana
     networks:
       - private-network
