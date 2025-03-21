@@ -7,6 +7,8 @@ __pycache__/
 *.ipynb
 jenkins-volumes/jenkins-data/*
 jenkins-volumes/jenkins-docker-certs/*
+grafana-volumes/grafana-data/*
+grafana-volumes/grafana-provisioning/*
 
 # Windows system files
 Thumbs.db
