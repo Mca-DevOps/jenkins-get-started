@@ -56,7 +56,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./grafana-volumes/grafana_data:/var/lib/grafana
+      - ./grafana-volumes/grafana-data:/var/lib/grafana
+      - ./grafana-volumes/grafana-provisioning:/etc/grafana/provisioning
     restart: on-failure
     container_name: grafana
     networks:
