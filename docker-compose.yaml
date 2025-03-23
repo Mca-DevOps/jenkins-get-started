@@ -27,7 +27,7 @@ services:
 
   # Docker jenkins agent container
   jenkins-docker-agent:
-    image: alpine/socat
+    image: alpine/socat:latest
     container_name: jenkins-docker-agent
     restart: always
     networks:
